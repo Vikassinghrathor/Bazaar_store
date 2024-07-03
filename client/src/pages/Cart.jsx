@@ -13,7 +13,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const stripePromise = loadStripe("pk_test_51PXiwPAHaA4U8TZkOZvzEcNtGte8yLglLDQsqYdYbBifX0Wcp7iLH5WIAQXgmA8BjnuIbimYZoqRci5YGCpSH6Ow00RN96RXDc");
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_KEY);
 
   useEffect(() => {
     let price = 0;
@@ -37,7 +37,7 @@ const Cart = () => {
         throw new Error("Stripe failed to load");
       }
 
-      const response = await axios.post("http://localhost:8000/pay", {
+      const response = await axios.post("https://bazaar-store.onrender.com/pay", {
         items: productData,
         email: userInfo.email,
       });
